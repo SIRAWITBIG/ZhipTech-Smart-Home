@@ -1,6 +1,6 @@
-# Deployment preparation — ZhipTech - Smart Home
+# Production deployment — ZhipTech - Smart Home
 
-สถานะนี้เตรียม **เว็บ 3D Simulation** สำหรับ hosting เท่านั้น ไม่มี Cloud API, database, authentication หรือ ESP32 outbound HTTPS client ที่พร้อมควบคุมบ้านผ่าน Internet และยังไม่ได้ deploy หรือ push
+เผยแพร่ **เว็บ 3D Simulation** ที่ https://zhiptech-smart-home.vercel.app แล้ว โดยใช้ [Private Repository](https://github.com/SIRAWITBIG/ZhipTech-Smart-Home) และ [Vercel Project](https://vercel.com/sirawit-sukhrip/zhiptech-smart-home) ไม่มี Cloud API, database, authentication หรือ ESP32 outbound HTTPS client ที่พร้อมควบคุมบ้านผ่าน Internet
 
 ## แยก Full และ Lite
 
@@ -8,9 +8,9 @@
 
 รัน `npm run preview` เพื่อตรวจ production assets บน loopback ได้หลังหยุด dev server ที่พอร์ตเดียวกัน Hash routes เช่น `/#map` ทำงานโดยไม่ต้อง rewrite `/api/*` ไปหน้า HTML
 
-## GitHub → Vercel หลังได้รับอนุญาต
+## GitHub → Vercel
 
-โฟลเดอร์นี้ยังไม่มี `.git` ขั้นเตรียมก่อนเผยแพร่จริงคือ review ไฟล์, secrets และขอบเขต repository จากนั้นจึง init/commit/push ภายใต้การอนุญาตของผู้ใช้ ห้ามนำ `.tools`, `.pio`, `data`, `dist`, `outputs`, `tmp`, config ส่วนตัว หรือ credentials ขึ้น GitHub
+Repository `SIRAWITBIG/ZhipTech-Smart-Home` เป็น Private, default/production branch คือ `main` และเชื่อมกับ Vercel Git integration แล้ว `.gitignore` ป้องกัน `.tools`, `.pio`, `data`, `dist`, `outputs`, `tmp`, `.vercel`, `.env` และ config ส่วนตัว สคริปต์ `npm run audit:release` ตรวจ index, historical blobs ที่ดึงมา และ dist ด้วยรูปแบบ credentials โดยไม่พิมพ์ค่าที่ตรวจพบ
 
 | Vercel setting | Value |
 | --- | --- |
@@ -19,14 +19,29 @@
 | Install command | `npm ci --ignore-scripts` |
 | Build command | `npm run build` |
 | Output directory | `dist` |
-| Node version | 22 หรือใหม่กว่าที่ Vercel รองรับและผ่าน build |
+| Node version | 24.x ตาม package.json และ project settings |
 | Environment variables | ไม่มีที่จำเป็นสำหรับ Simulation |
 
 `vercel.json` เก็บค่าข้างต้นและ headers พื้นฐานไว้แล้ว ไม่มี catch-all rewrite จึงไม่กลืน API errors เป็น HTML Assets ใช้ absolute root paths; ให้ hosting ที่ domain root ไม่ใช่ subdirectory
 
-หลังอนุญาต deployment: เชื่อม repository กับ Vercel → ตรวจ Preview Deployment ก่อน → ตรวจโลโก้ ฟอนต์ 3D/2D fallback และทั้ง9 routes → ตรวจ Console/Network ไม่พบ404 → ทดสอบ browser มือถือ → อนุมัติ Production โดยผู้ใช้ ไม่มี live house credentials ใน public demo
+Root Directory ใช้ราก repository เพราะ `package.json`, lockfile และ `scripts/build.mjs` อยู่ที่ราก; สคริปต์คัดลอกจาก `web/` ไป `dist/` ห้ามเปลี่ยนเป็น `web/` โดยไม่ปรับ architecture `.vercelignore` ตัด firmware/documents/cache จาก CLI upload แต่เก็บ `web/src/` ทั้งหมดไว้ ไม่ใช้ pattern `src/` ที่อาจตัด nested web source
 
-ราคา/แผน: ยังไม่ได้สร้างบริการหรือก่อค่าใช้จ่าย Vercel Hobby ระบุการใช้ส่วนตัวที่ไม่ใช่เชิงพาณิชย์ จึงต้องตรวจว่าโครงการ/การจำหน่ายชุด kit เหมาะกับแผนใดก่อนเผยแพร่จริง และตรวจ quota/ราคาล่าสุดที่ [Hobby plan](https://vercel.com/docs/plans/hobby) และ [pricing](https://vercel.com/pricing) ไม่ได้สรุปว่าการใช้แบรนด์เพื่อธุรกิจเข้าเกณฑ์ Hobby โดยอัตโนมัติ
+Push `main` สร้าง Production อัตโนมัติ ส่วน development/feature branches สร้าง Preview; deployment URL ของ Preview อาจมี Vercel Authentication ตาม project protection แต่ production domain เปิดเข้าชมได้โดยไม่ Login
+
+```powershell
+npm.cmd ci --ignore-scripts
+npm.cmd run check
+npm.cmd test
+npm.cmd run build
+git add .
+npm.cmd run audit:release
+git commit -m "Describe the update"
+git push origin main
+```
+
+ตรวจสถานะ build ใน GitHub Actions และ Vercel Dashboard แล้วเปิด Production URL ตรวจ flow ที่แก้ไข ไม่ต้อง deploy CLI ซ้ำเมื่อ Git integration ทำงานตามปกติ ถ้าต้องพัฒนาแยก ใช้ `git switch -c feature/ชื่อเรื่อง` แล้ว push branch เพื่อรับ Preview ก่อน merge เข้า `main`
+
+ใช้ทีม Vercel เดิมในแผน Hobby สำหรับ demo นี้ ไม่ได้เพิ่มแผนเสียเงินหรือสร้าง database/backend เพิ่ม ตรวจเงื่อนไขและ quota ที่ [Hobby plan](https://vercel.com/docs/plans/hobby) ก่อนขยายไปใช้เชิงพาณิชย์
 
 การตั้งค่า build อ้างอิง [Vercel project configuration](https://vercel.com/docs/project-configuration/vercel-json) ตรวจเอกสารในรอบพัฒนานี้
 

@@ -38,3 +38,6 @@ id_ed25519*
 **/.env
 **/.env.*
 !**/.env.example
+
+.vercel
+.env*

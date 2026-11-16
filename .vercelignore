@@ -10,8 +10,8 @@ tmp/
 outputs/
 work/
 backups/
-src/
-include/
+src/*.cpp
+include/*.h
 hardware/
 docs/
 Logo/

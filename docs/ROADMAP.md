@@ -4,7 +4,7 @@
 
 - เปลี่ยนเป็น ZhipTech - Smart Home และใช้ official logo เดิมโดยรักษาต้นฉบับ
 - บ้าน Three.js แบบ procedural แยก renderer/model/provider พร้อม state binding; ตรวจผล UI รอบล่าสุดก่อนสรุป acceptance
-- แยก Full3D `dist/` กับ ESP32 Lite `data/`; เตรียม Vercel config สำหรับ Simulation โดยไม่มี production deployment
+- แยก Full3D `dist/` กับ ESP32 Lite `data/`; เผยแพร่เว็บ Simulation ผ่าน Private GitHub และ Vercel ที่ https://zhiptech-smart-home.vercel.app
 - Firmware ปรับชื่อผลิตภัณฑ์/display/hostname และ compile ใหม่; ไม่เปลี่ยนวงจรหรือเปิด physical I/O
 - Cloud backend/database/auth/device client, internet live control และ integration tests เป็น milestone ถัดไป ยังไม่ได้ implement หรือ provision
 

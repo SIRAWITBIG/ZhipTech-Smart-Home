@@ -2,11 +2,15 @@
 
 เว็บควบคุมบ้านจำลองพร้อม **Interactive 3D Digital Twin** และเฟิร์มแวร์ ESP32 สำหรับชุดสาธิตแรงดันต่ำ ชื่อและโลโก้ใช้ตามข้อกำหนดล่าสุดของผู้ใช้ รุ่นปัจจุบันยังเป็น development milestone ของเป้าหมาย v1.0.0
 
-Workspace: `D:\ZhipTech\Projects\ZhipTech - Smart Home` พัฒนาต่อในโครงการเดิม โฟลเดอร์นี้ยังไม่มี Git repository จึงยังไม่มี commit, remote, push หรือ deployment
+Workspace: `D:\ZhipTech\Projects\ZhipTech - Smart Home` พัฒนาต่อในโครงการเดิม
+
+Production: **https://zhiptech-smart-home.vercel.app** · [Private GitHub repository](https://github.com/SIRAWITBIG/ZhipTech-Smart-Home) · [Vercel dashboard](https://vercel.com/sirawit-sukhrip/zhiptech-smart-home)
+
+`main` เชื่อมกับ Vercel Production; branch อื่นสร้าง Preview ตาม Git integration เว็บสาธารณะเป็น Simulation และปิดการควบคุม ESP32 จริง ดู [การเผยแพร่และอัปเดต](docs/DEPLOYMENT.md)
 
 ## เปิดเว็บ
 
-ต้องมี Node.js 22 ขึ้นไป และ npm ตัวเว็บใช้ Vanilla JavaScript กับ Three.js **0.187.0** ที่ตรึงเวอร์ชันไว้ การเรนเดอร์บ้านทำบน GPU ของ browser
+ใช้ Node.js 24.x และ npm ตัวเว็บใช้ Vanilla JavaScript กับ Three.js **0.187.0** ที่ตรึงเวอร์ชันไว้ การเรนเดอร์บ้านทำบน GPU ของ browser
 
 ```powershell
 Set-Location -LiteralPath 'D:\ZhipTech\Projects\ZhipTech - Smart Home'
@@ -83,4 +87,4 @@ $env:TMP = $env:TEMP
 - [Firmware build results](hardware/BUILD_RESULTS.md), [Toolchain/limitations](hardware/FIRMWARE_NOTES.md)
 - [QA รอบเริ่มต้น](docs/QA.md) เป็นประวัติการทดสอบก่อน 3D; ใช้รายงานรอบล่าสุดประกอบ
 
-ยังไม่ได้ทดสอบวงจรหรือคำสั่ง Live บน ESP32 จริง ไม่มีการ flash, push GitHub, สร้าง cloud resource หรือ deploy production โครงการใช้เฉพาะโหลด DC แรงดันต่ำ และการ compile ไม่ยืนยันการทำงานของโหลดทางกายภาพ
+ยังไม่ได้ทดสอบวงจรหรือคำสั่ง Live บน ESP32 จริง ไม่มีการ flash ฮาร์ดแวร์ Cloud Live/backend ยังไม่พัฒนา โครงการใช้เฉพาะโหลด DC แรงดันต่ำ และการ compile ไม่ยืนยันการทำงานของโหลดทางกายภาพ
