@@ -1,0 +1,40 @@
+# Generated web filesystem and local evidence
+/data/
+/dist/
+/tmp/
+/outputs/
+/work/
+/backups/
+
+# D-only portable toolchain and caches
+/.tools/
+/.pio/
+/node_modules/
+/web/node_modules/
+/web/public/vendor/three/
+/.vercel/
+/.venv/
+
+# Local credentials and board-specific verification
+.env
+.env.*
+!.env.example
+/include/secrets.h
+/include/local_config.h
+/include/config_local.h
+*.log
+.DS_Store
+Thumbs.db
+
+# Private key material and machine-specific credentials
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+**/credentials.json
+**/service-account*.json
+**/.env
+**/.env.*
+!**/.env.example

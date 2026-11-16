@@ -1,0 +1,23 @@
+# Web production build needs only web/, scripts/, package metadata and config.
+.git/
+.github/
+.pio/
+.tools/
+node_modules/
+dist/
+data/
+tmp/
+outputs/
+work/
+backups/
+src/
+include/
+hardware/
+docs/
+Logo/
+test/
+web/tests/
+.env*
+*.log
+*.pem
+*.key

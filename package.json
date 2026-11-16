@@ -1,0 +1,24 @@
+{
+  "name": "zhiptech-smart-home",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ZhipTech - Smart Home: interactive Three.js digital twin and local ESP32 controls",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "preview": "node scripts/dev.mjs --production",
+    "vendor": "node scripts/build-vendor.mjs",
+    "build": "node scripts/build.mjs",
+    "build:lite": "node scripts/build.mjs --lite",
+    "check": "node scripts/check.mjs",
+    "lint": "node scripts/check.mjs",
+    "test": "node --test web/tests/*.test.mjs",
+    "audit:release": "node scripts/release-audit.mjs"
+  },
+  "dependencies": {
+    "three": "0.187.0"
+  }
+}
