@@ -1,5 +1,20 @@
 # ZhipTech - Smart Home — Build results, 2026-11-17
 
+## Public showcase security update
+
+Recompiled after adding fail-closed authorization: a hardware-enabled API now rejects protected requests if the private API key has fewer than12 characters. Both environments PASS; no flash or physical HTTP/GPIO test was performed.
+
+| Environment | RAM | Flash |
+| --- | ---: | ---: |
+| esp32dev | 47,024 /327,680 bytes | 882,153 /1,310,720 bytes |
+| esp32dev-hardware-compile | 47,424 /327,680 bytes | 891,441 /1,310,720 bytes |
+
+Current firmware SHA-256: default `792B8B03F4239FCA9BB079D9FC5900D7EC5120E1F6F6AF0A432341C4369AF331`; enabled-driver `61A2A471DFA33041F3EBC5DA0E2EF17EF54F3DAF313C520266FB50C3CF66E70A`. The enabled-driver build uses the empty default key and can optimize away unreachable protected handlers; its smaller binary is not a runtime hardware benchmark. The remaining figures below are historical packaging/branding results before this change.
+
+Web verification for the showcase: syntax18 files, tests25/25, Full build36 assets /3,184,265 bytes, Lite25 assets /532,704 bytes. npm audit reported zero vulnerabilities.
+
+## Previous branding and filesystem build
+
 ดำเนินการใน workspace บน Drive D โดยใช้ portable Python/PlatformIO ใน `.tools/` ไม่มีคำสั่ง upload/flash และไม่ได้เชื่อมทดสอบวงจรจริง
 
 | Check | Actual result |

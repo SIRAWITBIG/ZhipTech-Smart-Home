@@ -61,7 +61,7 @@ ESP32 เสิร์ฟ `data/` ที่สร้างด้วย `npm run b
 
 Wi-Fi/API secrets ตั้งใน `include/config_local.h` (copy จาก example; git-ignored) ไม่ส่ง password กลับ API หรือพิมพ์ใน logs ไม่มี Wi-Fi configuration ผ่านหน้าเว็บในรอบนี้ (`wifiConfiguration:false`) ไม่สร้าง open setup AP: recovery AP เริ่มได้เฉพาะ setup password และ API key ยาวอย่างน้อย 12 ตัวอักษรที่กำหนดเองแล้ว
 
-`X-API-Key` บังคับเมื่อกำหนด key; key ว่างเป็น LAN prototype access ไม่มี authentication ต้องตระหนักเรื่องผู้ใช้ร่วม LAN HTTP ไม่เทียบเท่า HTTPS และห้าม expose ESP32 โดยตรงสู่ public Internet Cross-origin PC development ต้องระบุ exact `HUB_ALLOWED_ORIGIN`; ไม่มี wildcard CORS
+เมื่อเปิด hardware จริง (`HUB_HARDWARE_ENABLED=1`) API จะตอบ503หาก private key สั้นกว่า12ตัวอักษร และตอบ401เมื่อ `X-API-Key` ไม่ตรงกัน จึงไม่เปิดการควบคุม GPIO เมื่อยังไม่มี authentication ส่วน hardware-disabled prototype ที่ key ว่างแก้ได้เฉพาะ desired state และไม่ขับ GPIO HTTP ไม่เทียบเท่า HTTPS และห้าม expose ESP32 โดยตรงสู่ public Internet Cross-origin PC development ต้องระบุ exact `HUB_ALLOWED_ORIGIN`; ไม่มี wildcard CORS
 
 Request body ตรวจที่ handler ไม่เกิน 4096 bytes หลัง parser ของ Arduino WebServer รับ body แล้ว จึงยังไม่ใช่การป้องกัน memory/slow-client denial-of-service ระดับ production Synchronous WebServer และ DHT/OLED library calls อาจบล็อก loop ชั่วครู่ ต้องทดสอบ response latency/long run บนบอร์ดจริง
 

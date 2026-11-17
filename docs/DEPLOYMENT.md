@@ -1,6 +1,6 @@
 # Production deployment — ZhipTech - Smart Home
 
-เผยแพร่ **เว็บ 3D Simulation** ที่ https://zhiptech-smart-home.vercel.app แล้ว โดยใช้ [Private Repository](https://github.com/SIRAWITBIG/ZhipTech-Smart-Home) และ [Vercel Project](https://vercel.com/sirawit-sukhrip/zhiptech-smart-home) ไม่มี Cloud API, database, authentication หรือ ESP32 outbound HTTPS client ที่พร้อมควบคุมบ้านผ่าน Internet
+เผยแพร่ **เว็บ 3D Simulation** ที่ https://zhiptech-smart-home.vercel.app แล้ว โดยใช้ [GitHub Repository](https://github.com/SIRAWITBIG/ZhipTech-Smart-Home) และ [Vercel Project](https://vercel.com/sirawit-sukhrip/zhiptech-smart-home) ไม่มี Cloud API, database, authentication หรือ ESP32 outbound HTTPS client ที่พร้อมควบคุมบ้านผ่าน Internet
 
 ## แยก Full และ Lite
 
@@ -10,7 +10,7 @@
 
 ## GitHub → Vercel
 
-Repository `SIRAWITBIG/ZhipTech-Smart-Home` เป็น Private, default/production branch คือ `main` และเชื่อมกับ Vercel Git integration แล้ว `.gitignore` ป้องกัน `.tools`, `.pio`, `data`, `dist`, `outputs`, `tmp`, `.vercel`, `.env` และ config ส่วนตัว สคริปต์ `npm run audit:release` ตรวจ index, historical blobs ที่ดึงมา และ dist ด้วยรูปแบบ credentials โดยไม่พิมพ์ค่าที่ตรวจพบ
+Repository `SIRAWITBIG/ZhipTech-Smart-Home` ใช้ default/production branch `main` และเชื่อมกับ Vercel Git integration แล้ว การเผยแพร่ source เป็น Public Showcase ยังคงสงวนลิขสิทธิ์ตาม README และไม่เพิ่ม open-source license `.gitignore` ป้องกัน `.tools`, `.pio`, `data`, `dist`, `outputs`, `tmp`, `.vercel`, `.env` และ config ส่วนตัว สคริปต์ `npm run audit:release` ตรวจ index, historical blobs ที่ดึงมา และ dist ด้วยรูปแบบ credentials โดยไม่พิมพ์ค่าที่ตรวจพบ
 
 | Vercel setting | Value |
 | --- | --- |
