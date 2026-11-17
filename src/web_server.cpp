@@ -40,6 +40,9 @@ bool originAllowed() {
 }
 bool authorize() {
   if (!originAllowed()) return false;
+  if (Config::HardwareEnabled && strlen(HUB_API_KEY) < 12) {
+    error(503, "Hardware control requires a private API key of at least 12 characters"); return false;
+  }
   if (strlen(HUB_API_KEY) && !constantEquals(server.header("X-API-Key"), HUB_API_KEY)) {
     error(401, "A valid X-API-Key is required"); return false;
   }
@@ -195,7 +198,7 @@ void route() {
     if (!originAllowed()) return;
     StaticJsonDocument<256> doc;
     doc["ok"] = true; doc["schemaVersion"] = 1; doc["firmwareVersion"] = Config::Version;
-    doc["hardwareEnabled"] = Config::HardwareEnabled; doc["apiKeyRequired"] = strlen(HUB_API_KEY) > 0;
+    doc["hardwareEnabled"] = Config::HardwareEnabled; doc["apiKeyRequired"] = Config::HardwareEnabled || strlen(HUB_API_KEY) > 0;
     doc["freeHeap"] = ESP.getFreeHeap();
     String result; serializeJson(doc,result); server.send(200,"application/json",result); return;
   }

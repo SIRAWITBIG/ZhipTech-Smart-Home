@@ -6,7 +6,7 @@
 
 - Base URL ว่างหมายถึง same-origin เมื่อเปิดเว็บจาก ESP32; ระหว่างพัฒนาบน PC อาจตั้ง URL เช่น `http://192.168.1.20` และกำหนด allowed origin ฝั่งบอร์ด
 - Request/response เป็น JSON; mutation ใช้ `Content-Type: application/json`
-- หากกำหนด `HUB_API_KEY` ฝั่งบอร์ด ให้ส่ง `X-API-Key` ตามค่านั้น ไม่ส่ง Wi-Fi password กลับ API และไม่ใส่ credentials ใน URL
+- เมื่อเปิด hardware ฝั่งบอร์ดต้องมี `HUB_API_KEY` อย่างน้อย12ตัวอักษร มิฉะนั้น API ที่ต้อง authorize ตอบ503; ทุกคำขอส่ง `X-API-Key` ตรงกับค่าที่กำหนดหรือรับ401 ไม่ส่ง Wi-Fi password กลับ API และไม่ใส่ credentials ใน URL
 - Mutation ตอบ canonical status เมื่อสำเร็จ หรือ error เมื่อไม่สำเร็จ หาก endpoint ตอบ receipt, LiveProvider จะอ่าน `GET /api/status` ต่อก่อน commit UI
 - LiveProvider timeout เริ่มต้น 5 วินาที; HTTP/JSON/schema/network error ต้องแสดงต่อผู้ใช้ ไม่เปลี่ยนไปใช้ simulation fallback
 - โหมด Live รับเฉพาะ `mode: "live"`; payload `simulation` ถูกปฏิเสธ

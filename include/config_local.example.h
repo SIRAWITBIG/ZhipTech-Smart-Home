@@ -6,6 +6,7 @@
 // Optional recovery AP; disabled unless a password of at least 12 characters
 // AND a nonempty API key are configured. Keep both private.
 #define HUB_SETUP_AP_PASSWORD ""
+// Hardware-enabled builds reject control unless a private API key has >=12 characters.
 #define HUB_API_KEY ""
 // Cross-origin PC development only: exact origin, no wildcard.
 #define HUB_ALLOWED_ORIGIN ""
